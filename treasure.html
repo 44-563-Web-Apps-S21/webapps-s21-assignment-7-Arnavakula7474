@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html> <head> 
+    <title>My Flex Website</title>
+    <h2>Find the treasure Arnav Akula</h2>
+    <style>
+    .flex-container {
+      display: flex;  flex-direction:row;
+      background-color: red;
+  }
+
+.flex-container > div {  /*div children of the flex container*/
+  background-color: #f1f1f1; 
+  margin: 10px;  padding: 20px;  font-size: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 600px) { 
+	 .flex-container{
+		 flex-direction:column;
+		 background-color: green;
+	  }
+	}
+</style></head>
+<body>
+    <p>Click on the squares to find the treasure</p>
+    <div class="flex-container" id="clicks">
+        <p>Number of clicks is zero.</p></div>
+    <div class="flex-container" id="distance">
+        <p>Distance is unknown.</p></div>
+</body>
+<div class="flex-container" id="treasure">
+  <div class = "Row1">
+      <div><img src="oldbook.jpg" id="0" onclick="makeGuess(0)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="5" onclick="makeGuess(1)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="10" onclick="makeGuess(2)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="15" onclick="makeGuess(3)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="20" onclick="makeGuess(4)" alt="oldbook" width="200" height="200"></div>
+  </div>
+  <div class= "Row2">
+      <div><img src="oldbook.jpg" id="1" onclick="makeGuess(5)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="6" onclick="makeGuess(6)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="11" onclick="makeGuess(7)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="16" onclick="makeGuess(8)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="21" onclick="makeGuess(9)" alt="oldbook" width="200" height="200"></div>
+  </div>  
+  <div class="Row3">
+      <div><img src="oldbook.jpg" id="2" onclick="makeGuess(10)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="7" onclick="makeGuess(11)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="12" onclick="makeGuess(12)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="17" onclick="makeGuess(13)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="22" onclick="makeGuess(14)" alt="oldbook" width="200" height="200"></div>
+  </div>
+  <div class= "Row4">
+      <div><img src="oldbook.jpg" id="3" onclick="makeGuess(15)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="8" onclick="makeGuess(16)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="13" onclick="makeGuess(17)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="18" onclick="makeGuess(18)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="23" onclick="makeGuess(19)" alt="oldbook" width="200" height="200"></div>
+  </div>
+  <div class= "Row5">
+      <div><img src="oldbook.jpg" id="4" onclick="makeGuess(20)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="9" onclick="makeGuess(21)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="14" onclick="makeGuess(22)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="19" onclick="makeGuess(23)" alt="oldbook" width="200" height="200"></div>
+      <div><img src="oldbook.jpg" id="24" onclick="makeGuess(24)" alt="oldbook" width="200" height="200"></div>
+  </div> 
+    </div>
+    <script>
+      var ids = ["0", "5", "10", "15", "20", "1", "6", "11", "16", "21", "2", "7", "12", "17", "22", "3", "8", "13", "18", "23", "4", "9", "14", "19", "24"];
+      var clickCount = 0;
+      var twodarray = [["0", "5", "10", "15", "20"], ["1", "6", "11", "16", "21"], ["2", "7", "12", "17", "22"], ["3", "8", "13", "18", "23"], ["4", "9", "14", "19", "24"]];
+      
+      var treasureLocation = 18;
+      function makeGuess(position) {
+        id = ids[position]
+        if (id==treasureLocation) {
+          document.getElementById(id).src = "cash-jewels-gold-23796995.jpg";
+        }
+        else{
+          document.getElementById(id).src = "construction-sand-dust-pile-camera-shot-94002409.jpg";
+        }
+        clickCount+=1
+        document.getElementById("clicks").innerHTML = "Number of clicks is " + clickCount;
+        value = distance(position, treasureLocation);
+        document.getElementById("distance").innerHTML = "Distance is " + value;
+      }
+      function distance(pos1, pos2) {
+        let a = 0, b = 0, c = 0, d = 0;
+        for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 5; j++)
+                if (twodarray[i][j] == pos1) {
+                a = i;
+                b = j;
+                break;
+                }
+          }
+        for (let i = 0; i < 5; i++) {
+              for (let j = 0; j < 5; j++)
+              if (twodarray[i][j] == pos2) {
+              c = i;
+              d = j;
+              break;
+                }
+              }
+        let distance = Math.abs(c - a) + Math.abs(d - b);
+        return distance;
+      }
+    </script>
+</html>
